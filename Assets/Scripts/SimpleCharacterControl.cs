@@ -11,7 +11,6 @@ public class SimpleCharacterControl : NetworkBehaviour {
     }
 
     [SerializeField] private float m_moveSpeed = 2;
-    [SerializeField] private float m_turnSpeed = 200;
     [SerializeField] private float m_jumpForce = 4;
     [SerializeField] private Animator m_animator;
     [SerializeField] private Rigidbody m_rigidBody;
@@ -69,6 +68,13 @@ public class SimpleCharacterControl : NetworkBehaviour {
 		if (collision.gameObject.layer == 8) {
 			canClimb = false;
 			m_rigidBody.useGravity = true;
+		}
+	}
+
+	void OnTriggerStay(Collider collision) {
+		if (collision.gameObject.layer == 8) {
+			canClimb = true;
+			m_rigidBody.useGravity = false;
 		}
 	}
 
